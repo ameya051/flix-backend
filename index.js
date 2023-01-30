@@ -1,4 +1,5 @@
 const express = require("express");
+const http = require("http");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
@@ -11,12 +12,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-
-
 const port = process.env.PORT || 5000;
-app.listen(port, () => {
-  console.log(`server listening at http://localhost:${port}`);
-});
+const server = http.createServer(app);
 
 mongoose
   .connect(process.env.MONGODB_URL)
